@@ -1,0 +1,70 @@
+{
+  "activeCheckoutGroupId": "group-1",
+  "checkoutGroups": [
+    {
+      "id": "group-1",
+      "label": "Group 1",
+      "productLinks": {
+        "grand-final": "https://pawfeecthaven.shop/cart/47823223619842:1",
+        "brazil-morocco": "https://pawfeecthaven.shop/cart/47823223619842:1",
+        "france-senegal": "https://pawfeecthaven.shop/cart/47823223619842:1",
+        "argentina-algeria": "https://pawfeecthaven.shop/cart/47823223619842:1",
+        "usa-paraguay": "https://pawfeecthaven.shop/cart/47823223619842:1",
+        "england-croatia": "https://pawfeecthaven.shop/cart/47823223619842:1",
+        "spain-cape-verde": "https://pawfeecthaven.shop/cart/47823223619842:1"
+      }
+    }
+  ],
+  "games": [
+    {
+      "checkoutUrl": "https://pawfeecthaven.shop/cart/47823223619842:1",
+      "id": "grand-final",
+      "name": "Grand Final",
+      "oldPriceUsd": 6800,
+      "priceUsd": 5200
+    },
+    {
+      "checkoutUrl": "https://pawfeecthaven.shop/cart/47823223619842:1",
+      "id": "brazil-morocco",
+      "name": "Brazil vs Morocco",
+      "oldPriceUsd": 3200,
+      "priceUsd": 2400
+    },
+    {
+      "checkoutUrl": "https://pawfeecthaven.shop/cart/47823223619842:1",
+      "id": "france-senegal",
+      "name": "France vs Senegal",
+      "oldPriceUsd": 2800,
+      "priceUsd": 2100
+    },
+    {
+      "checkoutUrl": "https://pawfeecthaven.shop/cart/47823223619842:1",
+      "id": "argentina-algeria",
+      "name": "Argentina vs Algeria",
+      "oldPriceUsd": 3100,
+      "priceUsd": 2300
+    },
+    {
+      "checkoutUrl": "https://pawfeecthaven.shop/cart/47823223619842:1",
+      "id": "usa-paraguay",
+      "name": "United States vs Paraguay",
+      "oldPriceUsd": 2700,
+      "priceUsd": 2000
+    },
+    {
+      "checkoutUrl": "https://pawfeecthaven.shop/cart/47823223619842:1",
+      "id": "england-croatia",
+      "name": "England vs Croatia",
+      "oldPriceUsd": 2950,
+      "priceUsd": 2200
+    },
+    {
+      "checkoutUrl": "https://pawfeecthaven.shop/cart/47823223619842:1",
+      "id": "spain-cape-verde",
+      "name": "Spain vs Cape Verde",
+      "oldPriceUsd": 2500,
+      "priceUsd": 1900
+    }
+  ],
+  "utmfyScripts": []
+}
