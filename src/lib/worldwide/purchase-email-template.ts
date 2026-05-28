@@ -1,0 +1,320 @@
+type TicketEmailData = {
+  billingAddressHtml: string;
+  emailBody: string;
+  emailTitle: string;
+  eventLogoUrl: string;
+  orderName: string;
+  orderStatusUrl: string;
+  partnerLogoUrl: string;
+  partnerLogoWhiteUrl: string;
+  quantity: string;
+  shopEmail: string;
+  shopName: string;
+  shippingAddressHtml: string;
+  ticketDate: string;
+  ticketHolder: string;
+  ticketMatch: string;
+  ticketSeat: string;
+  ticketVenue: string;
+};
+
+export function renderPurchaseEmailHtml(data: TicketEmailData) {
+  return `<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>${data.emailTitle}</title>
+<style>
+@media only screen and (max-width: 640px) {
+  .email-shell { width: 100% !important; }
+  .email-card { padding: 34px 22px !important; border-radius: 0 !important; }
+  .email-stack { display: block !important; width: 100% !important; }
+  .email-right { text-align: left !important; padding-top: 12px !important; }
+  .email-title { font-size: 34px !important; }
+  .email-ticket-team { font-size: 26px !important; }
+  .email-ticket-main { display: block !important; width: 100% !important; }
+  .email-ticket-panel { border-radius: 18px !important; }
+  .email-ticket-cut { display: none !important; }
+  .email-ticket-mobile-seam { display: table !important; }
+  .email-ticket-main { padding: 24px 22px 22px !important; }
+  .email-ticket-top-cell { display: block !important; width: 100% !important; text-align: left !important; }
+  .email-ticket-quantity { padding-top: 10px !important; text-align: left !important; }
+  .email-ticket-kicker { font-size: 10px !important; letter-spacing: 2px !important; }
+  .email-ticket-stub { display: block !important; position: relative !important; width: 100% !important; border-left: 0 !important; border-top: 0 !important; padding: 0 0 26px !important; }
+  .email-stub-box { max-width: 210px !important; margin: 0 auto !important; padding-top: 22px !important; }
+  .email-ticket-logo { width: 50px !important; }
+  .email-stub-meta { margin-top: 14px !important; }
+  .email-partner-white { width: 104px !important; margin-top: 14px !important; }
+  .email-barcode { margin-top: 14px !important; }
+  .email-info-cell { display: block !important; width: 100% !important; padding-right: 0 !important; padding-bottom: 20px !important; }
+}
+</style>
+</head>
+
+<body style="margin:0;padding:0;background-color:#edf1f8;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;color:#07152c;">
+
+<table width="100%" cellpadding="0" cellspacing="0" role="presentation" style="background:#edf1f8;">
+<tr>
+<td align="center" style="padding:42px 14px;">
+
+<table class="email-shell" width="660" cellpadding="0" cellspacing="0" role="presentation" style="width:660px;max-width:660px;background:#ffffff;border-radius:18px;overflow:hidden;box-shadow:0 24px 70px rgba(2,17,38,0.12);">
+
+<tr>
+<td style="background:#304DFE;padding:0;">
+<table width="100%" cellpadding="0" cellspacing="0" role="presentation">
+<tr>
+<td style="height:10px;background:#304DFE;font-size:0;line-height:0;">&nbsp;</td>
+</tr>
+</table>
+</td>
+</tr>
+
+<tr>
+<td class="email-card" style="padding:46px 48px 42px;">
+
+<table width="100%" cellpadding="0" cellspacing="0" role="presentation">
+<tr>
+<td class="email-stack" valign="top" style="width:60%;">
+<div style="font-size:12px;font-weight:800;letter-spacing:2px;text-transform:uppercase;color:#304DFE;">FIFA World Cup 26</div>
+<h2 style="margin:8px 0 0;font-size:20px;line-height:1.2;font-weight:800;color:#021126;">${data.shopName}</h2>
+</td>
+<td class="email-stack email-right" align="right" valign="top" style="width:40%;font-size:12px;color:#647086;letter-spacing:1.4px;text-transform:uppercase;">
+Order ${data.orderName}
+<br>
+<img src="${data.partnerLogoUrl}" width="152" height="25" alt="Visa and Coca-Cola" style="display:inline-block;width:152px;height:auto;margin-top:16px;border:0;outline:none;text-decoration:none;">
+</td>
+</tr>
+</table>
+
+<table width="100%" cellpadding="0" cellspacing="0" role="presentation">
+<tr>
+<td style="padding-top:46px;text-align:left;">
+<h1 class="email-title" style="margin:0;font-size:42px;line-height:0.92;font-weight:900;letter-spacing:0;text-transform:uppercase;color:#021126;">
+${data.emailTitle}
+</h1>
+<p style="margin:18px 0 0;color:#536176;font-size:16px;line-height:1.65;">
+${data.emailBody}
+</p>
+</td>
+</tr>
+</table>
+
+<div class="email-ticket-panel" style="position:relative;margin-top:34px;background:#021126;border-radius:24px;overflow:hidden;">
+<div class="email-ticket-cut" style="position:absolute;z-index:3;left:-18px;top:50%;width:36px;height:36px;margin-top:-18px;background:#ffffff;border-radius:999px;font-size:0;line-height:0;">&nbsp;</div>
+<div class="email-ticket-cut" style="position:absolute;z-index:3;right:-18px;top:50%;width:36px;height:36px;margin-top:-18px;background:#ffffff;border-radius:999px;font-size:0;line-height:0;">&nbsp;</div>
+
+<table width="100%" cellpadding="0" cellspacing="0" role="presentation" style="border-collapse:separate;border-spacing:0;background:#021126;">
+<tr>
+<td class="email-ticket-main" width="70%" valign="top" style="width:70%;padding:28px 28px 26px;background:#041b52;background-image:linear-gradient(135deg,#0027c9 0%,#021126 72%);">
+<table width="100%" cellpadding="0" cellspacing="0" role="presentation">
+<tr>
+<td class="email-ticket-top-cell email-ticket-kicker" align="left" style="font-size:12px;font-weight:900;letter-spacing:3px;text-transform:uppercase;color:#ffffff;">Ticket</td>
+<td class="email-ticket-top-cell email-ticket-quantity email-ticket-kicker" align="right" style="font-size:12px;font-weight:900;letter-spacing:3px;text-transform:uppercase;color:#ffffff;">Quantity <span style="color:#aeb9ff;">${data.quantity}</span></td>
+</tr>
+</table>
+<div style="margin-top:24px;font-size:11px;font-weight:800;letter-spacing:2px;text-transform:uppercase;color:#aeb9ff;">Confirmed for</div>
+<div class="email-ticket-team" style="margin-top:8px;font-size:32px;line-height:1;font-weight:900;text-transform:uppercase;color:#ffffff;">${data.ticketMatch}</div>
+
+<table width="100%" cellpadding="0" cellspacing="0" role="presentation" style="margin-top:22px;border-top:1px dashed rgba(255,255,255,0.38);">
+<tr>
+<td class="email-info-cell" width="50%" valign="top" style="padding-top:20px;padding-right:14px;color:#ffffff;">
+<div style="font-size:11px;font-weight:800;letter-spacing:1.5px;text-transform:uppercase;color:#aeb9ff;">Customer</div>
+<div style="margin-top:7px;font-size:17px;line-height:1.25;font-weight:900;">${data.ticketHolder}</div>
+</td>
+<td class="email-info-cell" width="50%" valign="top" style="padding-top:20px;color:#ffffff;">
+<div style="font-size:11px;font-weight:800;letter-spacing:1.5px;text-transform:uppercase;color:#aeb9ff;">Date</div>
+<div style="margin-top:7px;font-size:15px;line-height:1.4;font-weight:700;">${data.ticketDate}</div>
+</td>
+</tr>
+<tr>
+<td class="email-info-cell" width="50%" valign="top" style="padding-top:18px;padding-right:14px;color:#ffffff;">
+<div style="font-size:11px;font-weight:800;letter-spacing:1.5px;text-transform:uppercase;color:#aeb9ff;">Venue</div>
+<div style="margin-top:7px;font-size:15px;line-height:1.4;font-weight:700;">${data.ticketVenue}</div>
+</td>
+<td class="email-info-cell" width="50%" valign="top" style="padding-top:18px;color:#ffffff;">
+<div style="font-size:11px;font-weight:800;letter-spacing:1.5px;text-transform:uppercase;color:#aeb9ff;">Seat</div>
+<div style="margin-top:7px;font-size:15px;line-height:1.4;font-weight:700;">${data.ticketSeat}</div>
+</td>
+</tr>
+</table>
+</td>
+<td class="email-ticket-stub" width="30%" valign="middle" style="position:relative;width:30%;padding:26px 18px;background:#020816;border-left:1px dashed rgba(255,255,255,0.42);text-align:center;color:#ffffff;">
+<table class="email-ticket-mobile-seam" width="100%" cellpadding="0" cellspacing="0" role="presentation" style="display:none;width:100%;border-collapse:collapse;">
+<tr>
+<td width="18" style="width:18px;height:36px;border-top:1px dashed rgba(255,255,255,0.35);font-size:0;line-height:0;">
+<div style="width:36px;height:36px;margin-left:-18px;margin-top:-18px;background:#ffffff;border-radius:999px;font-size:0;line-height:0;">&nbsp;</div>
+</td>
+<td style="height:36px;border-top:1px dashed rgba(255,255,255,0.35);font-size:0;line-height:0;">&nbsp;</td>
+<td width="18" align="right" style="width:18px;height:36px;border-top:1px dashed rgba(255,255,255,0.35);font-size:0;line-height:0;">
+<div style="width:36px;height:36px;margin-right:-18px;margin-top:-18px;background:#ffffff;border-radius:999px;font-size:0;line-height:0;">&nbsp;</div>
+</td>
+</tr>
+</table>
+<table class="email-stub-box" width="100%" cellpadding="0" cellspacing="0" role="presentation" style="height:100%;">
+<tr>
+<td align="center" valign="middle" style="text-align:center;">
+<img class="email-ticket-logo" src="${data.eventLogoUrl}" width="58" height="93" alt="FIFA World Cup 2026" style="display:block;width:58px;height:auto;margin:0 auto;border:0;outline:none;text-decoration:none;">
+<div class="email-stub-meta" style="margin-top:20px;">
+<div style="font-size:9px;font-weight:900;letter-spacing:1.8px;text-transform:uppercase;color:#aeb9ff;">Serial</div>
+<div style="margin-top:5px;font-size:13px;line-height:1;font-weight:900;color:#ffffff;">09223</div>
+</div>
+<img class="email-partner-white" src="${data.partnerLogoWhiteUrl}" width="96" height="16" alt="Visa and Coca-Cola" style="display:block;width:96px;height:auto;margin:18px auto 0;border:0;outline:none;text-decoration:none;">
+<table class="email-barcode" align="center" cellpadding="0" cellspacing="0" role="presentation" style="margin:18px auto 0;">
+<tr>
+<td style="width:2px;height:34px;background:#ffffff;font-size:0;line-height:0;">&nbsp;</td>
+<td style="width:2px;height:34px;background:transparent;font-size:0;line-height:0;">&nbsp;</td>
+<td style="width:4px;height:34px;background:#ffffff;font-size:0;line-height:0;">&nbsp;</td>
+<td style="width:2px;height:34px;background:transparent;font-size:0;line-height:0;">&nbsp;</td>
+<td style="width:2px;height:34px;background:#ffffff;font-size:0;line-height:0;">&nbsp;</td>
+<td style="width:3px;height:34px;background:transparent;font-size:0;line-height:0;">&nbsp;</td>
+<td style="width:5px;height:34px;background:#ffffff;font-size:0;line-height:0;">&nbsp;</td>
+<td style="width:2px;height:34px;background:transparent;font-size:0;line-height:0;">&nbsp;</td>
+<td style="width:2px;height:34px;background:#ffffff;font-size:0;line-height:0;">&nbsp;</td>
+<td style="width:2px;height:34px;background:transparent;font-size:0;line-height:0;">&nbsp;</td>
+<td style="width:3px;height:34px;background:#ffffff;font-size:0;line-height:0;">&nbsp;</td>
+<td style="width:3px;height:34px;background:transparent;font-size:0;line-height:0;">&nbsp;</td>
+<td style="width:4px;height:34px;background:#ffffff;font-size:0;line-height:0;">&nbsp;</td>
+<td style="width:2px;height:34px;background:transparent;font-size:0;line-height:0;">&nbsp;</td>
+<td style="width:6px;height:34px;background:#ffffff;font-size:0;line-height:0;">&nbsp;</td>
+</tr>
+</table>
+</td>
+</tr>
+</table>
+</td>
+</tr>
+</table>
+</div>
+
+<table width="100%" cellpadding="0" cellspacing="0" role="presentation">
+<tr>
+<td style="padding-top:36px;text-align:center;">
+<a href="${data.orderStatusUrl}" style="background:#304DFE;color:#ffffff;padding:17px 36px;text-decoration:none;border-radius:999px;font-weight:800;font-size:13px;letter-spacing:1.2px;text-transform:uppercase;display:inline-block;">
+View your order
+</a>
+</td>
+</tr>
+</table>
+
+<table width="100%" cellpadding="0" cellspacing="0" role="presentation">
+<tr>
+<td style="padding-top:54px;">
+<h3 style="font-size:18px;line-height:1.2;font-weight:900;margin:0 0 22px;color:#021126;">Customer information</h3>
+</td>
+</tr>
+<tr>
+<td>
+<table width="100%" cellpadding="0" cellspacing="0" role="presentation">
+<tr>
+<td class="email-info-cell" width="50%" valign="top" style="padding-right:18px;font-size:14px;color:#445067;line-height:1.6;">
+<strong style="color:#021126;">Shipping address</strong><br><br>
+${data.shippingAddressHtml}
+</td>
+<td class="email-info-cell" width="50%" valign="top" style="font-size:14px;color:#445067;line-height:1.6;">
+<strong style="color:#021126;">Billing address</strong><br><br>
+${data.billingAddressHtml}
+</td>
+</tr>
+</table>
+</td>
+</tr>
+</table>
+
+<table width="100%" cellpadding="0" cellspacing="0" role="presentation">
+<tr>
+<td style="padding-top:46px;text-align:center;font-size:13px;color:#7b8597;line-height:1.7;">
+If you have any questions, simply reply to this email or contact us at
+<a href="mailto:${data.shopEmail}" style="color:#304DFE;text-decoration:none;font-weight:800;">${data.shopEmail}</a>
+<br><br>
+&copy; ${data.shopName}. All rights reserved.
+</td>
+</tr>
+</table>
+
+</td>
+</tr>
+</table>
+
+</td>
+</tr>
+</table>
+
+</body>
+</html>`;
+}
+
+export const shopifyPurchaseEmailTemplate = `{% assign email_title = "Your ticket purchase is confirmed" %}
+{% assign email_body = "Your order has been successfully received and your FIFA World Cup 26 ticket is now being processed." %}
+{% assign first_line = line_items | first %}
+{% assign product_title = first_line.title | strip %}
+{% assign customer_name = customer.name | default: shipping_address.name | default: billing_address.name %}
+{% assign ticket_seat = first_line.properties.Seat | default: "Hospitality Access" %}
+{% assign ticket_venue = first_line.properties.Venue | default: "FIFA World Cup 26" %}
+{% case product_title %}
+{% when "BRA vs MAR", "Brazil vs Morocco" %}
+  {% assign ticket_date = "Saturday, June 13, 2026 at 6:00 pm" %}
+  {% assign ticket_venue = "MetLife Stadium, New York / New Jersey" %}
+{% when "ARG vs ALG", "Argentina vs Algeria" %}
+  {% assign ticket_date = "Tuesday, June 16, 2026" %}
+  {% assign ticket_venue = "Arrowhead Stadium, Kansas City" %}
+{% when "USA vs PAR", "United States vs Paraguay" %}
+  {% assign ticket_date = "Friday, June 12, 2026 at 6:00 pm" %}
+  {% assign ticket_venue = "SoFi Stadium, Los Angeles" %}
+{% when "FRA vs SEN", "France vs Senegal" %}
+  {% assign ticket_date = "Tuesday, June 16, 2026" %}
+  {% assign ticket_venue = "MetLife Stadium, New York / New Jersey" %}
+{% when "ENG vs CRO", "England vs Croatia" %}
+  {% assign ticket_date = "Wednesday, June 17, 2026" %}
+  {% assign ticket_venue = "AT&T Stadium, Dallas" %}
+{% when "ESP vs CPV", "Spain vs Cape Verde" %}
+  {% assign ticket_date = "Monday, June 15, 2026" %}
+  {% assign ticket_venue = "Mercedes-Benz Stadium, Atlanta" %}
+{% when "The Grand Finale" %}
+  {% assign ticket_date = "Sunday, July 19, 2026" %}
+  {% assign ticket_venue = "MetLife Stadium, New York / New Jersey" %}
+{% else %}
+  {% assign ticket_date = first_line.variant.title | default: "FIFA World Cup 26" %}
+{% endcase %}
+
+${renderPurchaseEmailHtml({
+  billingAddressHtml: "{{ billing_address | format_address }}",
+  emailBody: "{{ email_body }}",
+  emailTitle: "{{ email_title }}",
+  eventLogoUrl: "{{ 'logofifa.svg' | asset_url }}",
+  orderName: "{{ order_name }}",
+  orderStatusUrl: "https://tickets-mu-seven.vercel.app/ticket-access?match={{ product_title | url_encode }}&amp;customer={{ customer_name | url_encode }}&amp;date={{ ticket_date | url_encode }}&amp;quantity={{ first_line.quantity | url_encode }}&amp;venue={{ ticket_venue | url_encode }}&amp;seat={{ ticket_seat | url_encode }}&amp;order={{ order_name | url_encode }}&amp;purchase_date={{ created_at | date: '%B %d, %Y' | url_encode }}",
+  partnerLogoUrl: "{{ 'visacoca-blue.svg' | asset_url }}",
+  partnerLogoWhiteUrl: "{{ 'visacoca.svg' | asset_url }}",
+  quantity: "{{ first_line.quantity }}",
+  shippingAddressHtml: "{{ shipping_address | format_address }}",
+  shopEmail: "{{ shop.email }}",
+  shopName: "{{ shop.name }}",
+  ticketDate: "{{ ticket_date }}",
+  ticketHolder: "{{ customer_name }}",
+  ticketMatch: "{{ first_line.title }}",
+  ticketSeat: "{{ ticket_seat }}",
+  ticketVenue: "{{ ticket_venue }}",
+})}`;
+
+export const purchaseEmailPreviewHtml = renderPurchaseEmailHtml({
+  billingAddressHtml: "Lucas Andrade<br>221 Meridian Ave<br>Miami, FL 33139<br>United States",
+  emailBody:
+    "Your order has been successfully received. Your FIFA World Cup 26 hospitality ticket is being prepared and you can follow every update from your order page.",
+  emailTitle: "Your ticket purchase is confirmed",
+  eventLogoUrl: "/logofifa.svg",
+  orderName: "#WCT-1026",
+  orderStatusUrl:
+    "https://tickets-mu-seven.vercel.app/ticket-access?match=BRA%20vs%20MAR&customer=Lucas%20Andrade&date=Saturday%2C%20June%2013%2C%202026%20at%206%3A00%20pm&quantity=2&venue=MetLife%20Stadium%2C%20New%20York%20%2F%20New%20Jersey&seat=Hospitality%20Lounge%20-%20Section%20126&order=%23WCT-1026&purchase_date=May%2028%2C%202026",
+  partnerLogoUrl: "/visacoca-blue.svg",
+  partnerLogoWhiteUrl: "/visacoca.svg",
+  quantity: "2",
+  shippingAddressHtml: "Lucas Andrade<br>221 Meridian Ave<br>Miami, FL 33139<br>United States",
+  shopEmail: "support@worldcuptickets.com",
+  shopName: "World Cup Tickets",
+  ticketDate: "Saturday, June 13, 2026 at 6:00 pm",
+  ticketHolder: "Lucas Andrade",
+  ticketMatch: "BRA vs MAR",
+  ticketSeat: "Hospitality Lounge - Section 126",
+  ticketVenue: "MetLife Stadium, New York / New Jersey",
+});

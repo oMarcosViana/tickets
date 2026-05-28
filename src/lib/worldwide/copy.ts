@@ -62,6 +62,45 @@ export const enCopy = {
   "footer.cta": "Register Interest",
   "footer.availability":
     "Interested in packages not available online? Please contact our hospitality team for current access availability.",
+  "access.header": "Ticket Access",
+  "access.confirmedOrder": "Confirmed order",
+  "access.orderReceived": "Order received",
+  "access.ticketHolder": "Ticket holder",
+  "access.defaultPackage": "Hospitality Access",
+  "access.purchase": "{date} purchase",
+  "access.heroText":
+    "Hi {customer}, your hospitality access page is active. Tickets are scheduled to unlock 6 hours before match time.",
+  "access.matchDate": "Match date",
+  "access.venue": "Venue",
+  "access.quantity": "Quantity",
+  "access.releaseTitle": "Ticket release",
+  "access.releaseSubtitle": "6 hours before the match",
+  "access.days": "Days",
+  "access.hours": "Hours",
+  "access.minutes": "Min",
+  "access.seconds": "Sec",
+  "access.processing": "Processing",
+  "access.venueKicker": "Venue details",
+  "access.venueTitle": "Matchday location",
+  "access.venueDescription":
+    "The access page stays available as your order moves toward the ticket release window.",
+  "access.package": "Package",
+  "access.status": "Status",
+  "access.waiting": "Waiting for release",
+  "access.faqKicker": "FAQ",
+  "access.faqTitle": "Before kickoff",
+  "access.faq.q1": "When will my ticket be released?",
+  "access.faq.a1":
+    "Your ticket and access instructions become available 6 hours before match time. Until then, follow the countdown on this page.",
+  "access.faq.q2": "Do I need to refresh the page?",
+  "access.faq.a2":
+    "No. The countdown and progress bar update automatically as the release window approaches.",
+  "access.faq.q3": "How can I access this page again?",
+  "access.faq.a3":
+    "Use the confirmation email link whenever you need to return. We recommend keeping that email saved until matchday.",
+  "access.faq.q4": "What if my details are wrong?",
+  "access.faq.a4":
+    "Reply to the confirmation email if your name, match, quantity, venue, or package is incorrect.",
 } satisfies WorldwideCopy;
 
 const ptBrCopy = {
@@ -123,6 +162,45 @@ const ptBrCopy = {
   "footer.cta": "Registrar interesse",
   "footer.availability":
     "Interessado em pacotes indisponíveis online? Fale com nossa equipe de hospitality para consultar a disponibilidade atual.",
+  "access.header": "Acesso ao Ingresso",
+  "access.confirmedOrder": "Pedido confirmado",
+  "access.orderReceived": "Pedido recebido",
+  "access.ticketHolder": "Cliente",
+  "access.defaultPackage": "Acesso Hospitality",
+  "access.purchase": "Compra em {date}",
+  "access.heroText":
+    "Olá {customer}, sua página de acesso hospitality está ativa. Os ingressos serão liberados 6 horas antes do horário do jogo.",
+  "access.matchDate": "Data do jogo",
+  "access.venue": "Estádio",
+  "access.quantity": "Quantidade",
+  "access.releaseTitle": "Liberação do ingresso",
+  "access.releaseSubtitle": "6 horas antes do jogo",
+  "access.days": "Dias",
+  "access.hours": "Horas",
+  "access.minutes": "Min",
+  "access.seconds": "Seg",
+  "access.processing": "Processando",
+  "access.venueKicker": "Detalhes do estádio",
+  "access.venueTitle": "Local do jogo",
+  "access.venueDescription":
+    "A página de acesso permanece disponível enquanto seu pedido avança para a janela de liberação do ingresso.",
+  "access.package": "Pacote",
+  "access.status": "Status",
+  "access.waiting": "Aguardando liberação",
+  "access.faqKicker": "FAQ",
+  "access.faqTitle": "Antes do jogo",
+  "access.faq.q1": "Quando meu ingresso será liberado?",
+  "access.faq.a1":
+    "O ingresso e as instruções de acesso ficam disponíveis 6 horas antes do horário do jogo. Até lá, acompanhe o cronômetro nesta página.",
+  "access.faq.q2": "Preciso atualizar a página?",
+  "access.faq.a2":
+    "Não precisa. O cronômetro e a barra de progresso atualizam automaticamente enquanto a janela de liberação se aproxima.",
+  "access.faq.q3": "Como acesso esta página de novo?",
+  "access.faq.a3":
+    "Use o link do email de confirmação sempre que quiser voltar. Recomendamos manter esse email salvo até o dia do jogo.",
+  "access.faq.q4": "E se meus dados estiverem errados?",
+  "access.faq.a4":
+    "Responda ao email de confirmação se nome, jogo, quantidade, estádio ou pacote estiverem incorretos.",
 } satisfies WorldwideCopy;
 
 const compactTranslations: Partial<Record<SupportedLocale, Partial<WorldwideCopy>>> = {
