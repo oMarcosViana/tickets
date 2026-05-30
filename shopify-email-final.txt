@@ -1,32 +1,42 @@
-type TicketEmailData = {
-  billingAddressHtml: string;
-  emailBody: string;
-  emailTitle: string;
-  eventLogoUrl: string;
-  orderName: string;
-  orderStatusUrl: string;
-  partnerLogoUrl: string;
-  partnerLogoWhiteUrl: string;
-  quantity: string;
-  shopEmail: string;
-  shopName: string;
-  shippingAddressHtml: string;
-  ticketDate: string;
-  ticketHolder: string;
-  ticketMatch: string;
-  ticketSeat: string;
-  ticketVenue: string;
-};
+{% assign email_title = "Your ticket purchase is confirmed" %}
+{% assign email_body = "Your order has been successfully received and your FIFA World Cup 26 ticket is now being processed." %}
+{% assign first_line = line_items | first %}
+{% assign product_title = first_line.title | strip %}
+{% assign customer_name = customer.name | default: shipping_address.name | default: billing_address.name %}
+{% assign ticket_seat = first_line.properties.Seat | default: "Hospitality Access" %}
+{% assign ticket_venue = first_line.properties.Venue | default: "FIFA World Cup 26" %}
+{% case product_title %}
+{% when "BRA vs MAR", "Brazil vs Morocco" %}
+  {% assign ticket_date = "Saturday, June 13, 2026 at 6:00 pm" %}
+  {% assign ticket_venue = "MetLife Stadium, New York / New Jersey" %}
+{% when "ARG vs ALG", "Argentina vs Algeria" %}
+  {% assign ticket_date = "Tuesday, June 16, 2026" %}
+  {% assign ticket_venue = "Arrowhead Stadium, Kansas City" %}
+{% when "USA vs PAR", "United States vs Paraguay" %}
+  {% assign ticket_date = "Friday, June 12, 2026 at 6:00 pm" %}
+  {% assign ticket_venue = "SoFi Stadium, Los Angeles" %}
+{% when "FRA vs SEN", "France vs Senegal" %}
+  {% assign ticket_date = "Tuesday, June 16, 2026" %}
+  {% assign ticket_venue = "MetLife Stadium, New York / New Jersey" %}
+{% when "ENG vs CRO", "England vs Croatia" %}
+  {% assign ticket_date = "Wednesday, June 17, 2026" %}
+  {% assign ticket_venue = "AT&T Stadium, Dallas" %}
+{% when "ESP vs CPV", "Spain vs Cape Verde" %}
+  {% assign ticket_date = "Monday, June 15, 2026" %}
+  {% assign ticket_venue = "Mercedes-Benz Stadium, Atlanta" %}
+{% when "The Grand Finale" %}
+  {% assign ticket_date = "Sunday, July 19, 2026" %}
+  {% assign ticket_venue = "MetLife Stadium, New York / New Jersey" %}
+{% else %}
+  {% assign ticket_date = first_line.variant.title | default: "FIFA World Cup 26" %}
+{% endcase %}
 
-const emailAssetBaseUrl = "https://tickets-mu-seven.vercel.app";
-
-export function renderPurchaseEmailHtml(data: TicketEmailData) {
-  return `<!DOCTYPE html>
+<!DOCTYPE html>
 <html>
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>${data.emailTitle}</title>
+<title>{{ email_title }}</title>
 <style>
 @media only screen and (max-width: 640px) {
   .email-shell { width: 100% !important; }
@@ -77,12 +87,12 @@ export function renderPurchaseEmailHtml(data: TicketEmailData) {
 <tr>
 <td class="email-stack" valign="top" style="width:60%;">
 <div style="font-size:12px;font-weight:800;letter-spacing:2px;text-transform:uppercase;color:#304DFE;">FIFA World Cup 26</div>
-<h2 style="margin:8px 0 0;font-size:20px;line-height:1.2;font-weight:800;color:#021126;">${data.shopName}</h2>
+<h2 style="margin:8px 0 0;font-size:20px;line-height:1.2;font-weight:800;color:#021126;">{{ shop.name }}</h2>
 </td>
 <td class="email-stack email-right" align="right" valign="top" style="width:40%;font-size:12px;color:#647086;letter-spacing:1.4px;text-transform:uppercase;">
-Order ${data.orderName}
+Order {{ order_name }}
 <br>
-<img src="${data.partnerLogoUrl}" width="152" height="25" alt="Visa and Coca-Cola" style="display:inline-block;width:152px;height:auto;margin-top:16px;border:0;outline:none;text-decoration:none;">
+<img src="https://tickets-mu-seven.vercel.app/visacoca-blue.svg" width="152" height="25" alt="Visa and Coca-Cola" style="display:inline-block;width:152px;height:auto;margin-top:16px;border:0;outline:none;text-decoration:none;">
 </td>
 </tr>
 </table>
@@ -91,10 +101,10 @@ Order ${data.orderName}
 <tr>
 <td style="padding-top:46px;text-align:left;">
 <h1 class="email-title" style="margin:0;font-size:42px;line-height:0.92;font-weight:900;letter-spacing:0;text-transform:uppercase;color:#021126;">
-${data.emailTitle}
+{{ email_title }}
 </h1>
 <p style="margin:18px 0 0;color:#536176;font-size:16px;line-height:1.65;">
-${data.emailBody}
+{{ email_body }}
 </p>
 </td>
 </tr>
@@ -107,31 +117,31 @@ ${data.emailBody}
 <table width="100%" cellpadding="0" cellspacing="0" role="presentation">
 <tr>
 <td class="email-ticket-top-cell email-ticket-kicker" align="left" style="font-size:12px;font-weight:900;letter-spacing:3px;text-transform:uppercase;color:#ffffff;">Ticket</td>
-<td class="email-ticket-top-cell email-ticket-quantity email-ticket-kicker" align="right" style="font-size:12px;font-weight:900;letter-spacing:3px;text-transform:uppercase;color:#ffffff;">Quantity <span style="color:#aeb9ff;">${data.quantity}</span></td>
+<td class="email-ticket-top-cell email-ticket-quantity email-ticket-kicker" align="right" style="font-size:12px;font-weight:900;letter-spacing:3px;text-transform:uppercase;color:#ffffff;">Quantity <span style="color:#aeb9ff;">{{ first_line.quantity }}</span></td>
 </tr>
 </table>
 <div style="margin-top:24px;font-size:11px;font-weight:800;letter-spacing:2px;text-transform:uppercase;color:#aeb9ff;">Confirmed for</div>
-<div class="email-ticket-team" style="margin-top:8px;font-size:32px;line-height:1;font-weight:900;text-transform:uppercase;color:#ffffff;">${data.ticketMatch}</div>
+<div class="email-ticket-team" style="margin-top:8px;font-size:32px;line-height:1;font-weight:900;text-transform:uppercase;color:#ffffff;">{{ first_line.title }}</div>
 
 <table width="100%" cellpadding="0" cellspacing="0" role="presentation" style="margin-top:22px;border-top:1px dashed rgba(255,255,255,0.38);">
 <tr>
 <td class="email-info-cell" width="50%" valign="top" style="padding-top:20px;padding-right:14px;color:#ffffff;">
 <div style="font-size:11px;font-weight:800;letter-spacing:1.5px;text-transform:uppercase;color:#aeb9ff;">Customer</div>
-<div style="margin-top:7px;font-size:17px;line-height:1.25;font-weight:900;">${data.ticketHolder}</div>
+<div style="margin-top:7px;font-size:17px;line-height:1.25;font-weight:900;">{{ customer_name }}</div>
 </td>
 <td class="email-info-cell" width="50%" valign="top" style="padding-top:20px;color:#ffffff;">
 <div style="font-size:11px;font-weight:800;letter-spacing:1.5px;text-transform:uppercase;color:#aeb9ff;">Date</div>
-<div style="margin-top:7px;font-size:15px;line-height:1.4;font-weight:700;">${data.ticketDate}</div>
+<div style="margin-top:7px;font-size:15px;line-height:1.4;font-weight:700;">{{ ticket_date }}</div>
 </td>
 </tr>
 <tr>
 <td class="email-info-cell" width="50%" valign="top" style="padding-top:18px;padding-right:14px;color:#ffffff;">
 <div style="font-size:11px;font-weight:800;letter-spacing:1.5px;text-transform:uppercase;color:#aeb9ff;">Venue</div>
-<div style="margin-top:7px;font-size:15px;line-height:1.4;font-weight:700;">${data.ticketVenue}</div>
+<div style="margin-top:7px;font-size:15px;line-height:1.4;font-weight:700;">{{ ticket_venue }}</div>
 </td>
 <td class="email-info-cell" width="50%" valign="top" style="padding-top:18px;color:#ffffff;">
 <div style="font-size:11px;font-weight:800;letter-spacing:1.5px;text-transform:uppercase;color:#aeb9ff;">Seat</div>
-<div style="margin-top:7px;font-size:15px;line-height:1.4;font-weight:700;">${data.ticketSeat}</div>
+<div style="margin-top:7px;font-size:15px;line-height:1.4;font-weight:700;">{{ ticket_seat }}</div>
 </td>
 </tr>
 </table>
@@ -140,12 +150,12 @@ ${data.emailBody}
 <table class="email-stub-box" width="100%" cellpadding="0" cellspacing="0" role="presentation" style="height:100%;">
 <tr>
 <td align="center" valign="middle" style="text-align:center;">
-<img class="email-ticket-logo" src="${data.eventLogoUrl}" width="58" height="93" alt="FIFA World Cup 2026" style="display:block;width:58px;height:auto;margin:0 auto;border:0;outline:none;text-decoration:none;">
+<img class="email-ticket-logo" src="https://tickets-mu-seven.vercel.app/logofifa.svg" width="58" height="93" alt="FIFA World Cup 2026" style="display:block;width:58px;height:auto;margin:0 auto;border:0;outline:none;text-decoration:none;">
 <div class="email-stub-meta" style="margin-top:20px;">
 <div style="font-size:9px;font-weight:900;letter-spacing:1.8px;text-transform:uppercase;color:#aeb9ff;">Serial</div>
 <div style="margin-top:5px;font-size:13px;line-height:1;font-weight:900;color:#ffffff;">09223</div>
 </div>
-<img class="email-partner-white" src="${data.partnerLogoWhiteUrl}" width="96" height="16" alt="Visa and Coca-Cola" style="display:block;width:96px;height:auto;margin:18px auto 0;border:0;outline:none;text-decoration:none;">
+<img class="email-partner-white" src="https://tickets-mu-seven.vercel.app/visacoca.svg" width="96" height="16" alt="Visa and Coca-Cola" style="display:block;width:96px;height:auto;margin:18px auto 0;border:0;outline:none;text-decoration:none;">
 <table class="email-barcode" align="center" cellpadding="0" cellspacing="0" role="presentation" style="margin:18px auto 0;">
 <tr>
 <td style="width:2px;height:34px;background:#ffffff;font-size:0;line-height:0;">&nbsp;</td>
@@ -176,7 +186,7 @@ ${data.emailBody}
 <table width="100%" cellpadding="0" cellspacing="0" role="presentation">
 <tr>
 <td style="padding-top:36px;text-align:center;">
-<a href="${data.orderStatusUrl}" style="background:#304DFE;color:#ffffff;padding:17px 36px;text-decoration:none;border-radius:999px;font-weight:800;font-size:13px;letter-spacing:1.2px;text-transform:uppercase;display:inline-block;">
+<a href="https://tickets-mu-seven.vercel.app/ticket-access?match={{ product_title | url_encode }}&amp;customer={{ customer_name | url_encode }}&amp;date={{ ticket_date | url_encode }}&amp;quantity={{ first_line.quantity | url_encode }}&amp;venue={{ ticket_venue | url_encode }}&amp;seat={{ ticket_seat | url_encode }}&amp;order={{ order_name | url_encode }}&amp;purchase_date={{ created_at | date: '%B %d, %Y' | url_encode }}" style="background:#304DFE;color:#ffffff;padding:17px 36px;text-decoration:none;border-radius:999px;font-weight:800;font-size:13px;letter-spacing:1.2px;text-transform:uppercase;display:inline-block;">
 View your order
 </a>
 </td>
@@ -195,11 +205,11 @@ View your order
 <tr>
 <td class="email-info-cell" width="50%" valign="top" style="padding-right:18px;font-size:14px;color:#445067;line-height:1.6;">
 <strong style="color:#021126;">Shipping address</strong><br><br>
-${data.shippingAddressHtml}
+{{ shipping_address | format_address }}
 </td>
 <td class="email-info-cell" width="50%" valign="top" style="font-size:14px;color:#445067;line-height:1.6;">
 <strong style="color:#021126;">Billing address</strong><br><br>
-${data.billingAddressHtml}
+{{ billing_address | format_address }}
 </td>
 </tr>
 </table>
@@ -211,9 +221,9 @@ ${data.billingAddressHtml}
 <tr>
 <td style="padding-top:46px;text-align:center;font-size:13px;color:#7b8597;line-height:1.7;">
 If you have any questions, simply reply to this email or contact us at
-<a href="mailto:${data.shopEmail}" style="color:#304DFE;text-decoration:none;font-weight:800;">${data.shopEmail}</a>
+<a href="mailto:{{ shop.email }}" style="color:#304DFE;text-decoration:none;font-weight:800;">{{ shop.email }}</a>
 <br><br>
-&copy; ${data.shopName}. All rights reserved.
+&copy; {{ shop.name }}. All rights reserved.
 </td>
 </tr>
 </table>
@@ -227,80 +237,4 @@ If you have any questions, simply reply to this email or contact us at
 </table>
 
 </body>
-</html>`;
-}
-
-export const shopifyPurchaseEmailTemplate = `{% assign email_title = "Your ticket purchase is confirmed" %}
-{% assign email_body = "Your order has been successfully received and your FIFA World Cup 26 ticket is now being processed." %}
-{% assign first_line = line_items | first %}
-{% assign product_title = first_line.title | strip %}
-{% assign customer_name = customer.name | default: shipping_address.name | default: billing_address.name %}
-{% assign ticket_seat = first_line.properties.Seat | default: "Hospitality Access" %}
-{% assign ticket_venue = first_line.properties.Venue | default: "FIFA World Cup 26" %}
-{% case product_title %}
-{% when "BRA vs MAR", "Brazil vs Morocco" %}
-  {% assign ticket_date = "Saturday, June 13, 2026 at 6:00 pm" %}
-  {% assign ticket_venue = "MetLife Stadium, New York / New Jersey" %}
-{% when "ARG vs ALG", "Argentina vs Algeria" %}
-  {% assign ticket_date = "Tuesday, June 16, 2026" %}
-  {% assign ticket_venue = "Arrowhead Stadium, Kansas City" %}
-{% when "USA vs PAR", "United States vs Paraguay" %}
-  {% assign ticket_date = "Friday, June 12, 2026 at 6:00 pm" %}
-  {% assign ticket_venue = "SoFi Stadium, Los Angeles" %}
-{% when "FRA vs SEN", "France vs Senegal" %}
-  {% assign ticket_date = "Tuesday, June 16, 2026" %}
-  {% assign ticket_venue = "MetLife Stadium, New York / New Jersey" %}
-{% when "ENG vs CRO", "England vs Croatia" %}
-  {% assign ticket_date = "Wednesday, June 17, 2026" %}
-  {% assign ticket_venue = "AT&T Stadium, Dallas" %}
-{% when "ESP vs CPV", "Spain vs Cape Verde" %}
-  {% assign ticket_date = "Monday, June 15, 2026" %}
-  {% assign ticket_venue = "Mercedes-Benz Stadium, Atlanta" %}
-{% when "The Grand Finale" %}
-  {% assign ticket_date = "Sunday, July 19, 2026" %}
-  {% assign ticket_venue = "MetLife Stadium, New York / New Jersey" %}
-{% else %}
-  {% assign ticket_date = first_line.variant.title | default: "FIFA World Cup 26" %}
-{% endcase %}
-
-${renderPurchaseEmailHtml({
-  billingAddressHtml: "{{ billing_address | format_address }}",
-  emailBody: "{{ email_body }}",
-  emailTitle: "{{ email_title }}",
-  eventLogoUrl: `${emailAssetBaseUrl}/logofifa.svg`,
-  orderName: "{{ order_name }}",
-  orderStatusUrl: "https://tickets-mu-seven.vercel.app/ticket-access?match={{ product_title | url_encode }}&amp;customer={{ customer_name | url_encode }}&amp;date={{ ticket_date | url_encode }}&amp;quantity={{ first_line.quantity | url_encode }}&amp;venue={{ ticket_venue | url_encode }}&amp;seat={{ ticket_seat | url_encode }}&amp;order={{ order_name | url_encode }}&amp;purchase_date={{ created_at | date: '%B %d, %Y' | url_encode }}",
-  partnerLogoUrl: `${emailAssetBaseUrl}/visacoca-blue.svg`,
-  partnerLogoWhiteUrl: `${emailAssetBaseUrl}/visacoca.svg`,
-  quantity: "{{ first_line.quantity }}",
-  shippingAddressHtml: "{{ shipping_address | format_address }}",
-  shopEmail: "{{ shop.email }}",
-  shopName: "{{ shop.name }}",
-  ticketDate: "{{ ticket_date }}",
-  ticketHolder: "{{ customer_name }}",
-  ticketMatch: "{{ first_line.title }}",
-  ticketSeat: "{{ ticket_seat }}",
-  ticketVenue: "{{ ticket_venue }}",
-})}`;
-
-export const purchaseEmailPreviewHtml = renderPurchaseEmailHtml({
-  billingAddressHtml: "Lucas Andrade<br>221 Meridian Ave<br>Miami, FL 33139<br>United States",
-  emailBody:
-    "Your order has been successfully received. Your FIFA World Cup 26 hospitality ticket is being prepared and you can follow every update from your order page.",
-  emailTitle: "Your ticket purchase is confirmed",
-  eventLogoUrl: `${emailAssetBaseUrl}/logofifa.svg`,
-  orderName: "#WCT-1026",
-  orderStatusUrl:
-    "https://tickets-mu-seven.vercel.app/ticket-access?match=BRA%20vs%20MAR&customer=Lucas%20Andrade&date=Saturday%2C%20June%2013%2C%202026%20at%206%3A00%20pm&quantity=2&venue=MetLife%20Stadium%2C%20New%20York%20%2F%20New%20Jersey&seat=Hospitality%20Lounge%20-%20Section%20126&order=%23WCT-1026&purchase_date=May%2028%2C%202026",
-  partnerLogoUrl: `${emailAssetBaseUrl}/visacoca-blue.svg`,
-  partnerLogoWhiteUrl: `${emailAssetBaseUrl}/visacoca.svg`,
-  quantity: "2",
-  shippingAddressHtml: "Lucas Andrade<br>221 Meridian Ave<br>Miami, FL 33139<br>United States",
-  shopEmail: "support@worldcuptickets.com",
-  shopName: "World Cup Tickets",
-  ticketDate: "Saturday, June 13, 2026 at 6:00 pm",
-  ticketHolder: "Lucas Andrade",
-  ticketMatch: "BRA vs MAR",
-  ticketSeat: "Hospitality Lounge - Section 126",
-  ticketVenue: "MetLife Stadium, New York / New Jersey",
-});
+</html>

@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>You unlocked 70% off</title>
+<style>
+@media only screen and (max-width: 640px) {
+  .offer-shell { width: 100% !important; }
+  .offer-card { padding: 30px 22px !important; border-radius: 0 !important; }
+  .offer-logo-cell { display: block !important; width: 100% !important; text-align: left !important; }
+  .offer-logo-right { padding-top: 16px !important; text-align: left !important; }
+  .offer-title { font-size: 52px !important; }
+  .offer-button { display: block !important; text-align: center !important; }
+}
+</style>
+</head>
+
+<body style="margin:0;padding:0;background-color:#edf1f8;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;color:#07152c;">
+
+<table width="100%" cellpadding="0" cellspacing="0" role="presentation" style="background:#edf1f8;">
+<tr>
+<td align="center" style="padding:42px 14px;">
+
+<table class="offer-shell" width="660" cellpadding="0" cellspacing="0" role="presentation" style="width:660px;max-width:660px;background:#ffffff;border-radius:18px;overflow:hidden;box-shadow:0 24px 70px rgba(2,17,38,0.12);">
+<tr>
+<td style="height:10px;background:#304DFE;font-size:0;line-height:0;">&nbsp;</td>
+</tr>
+
+<tr>
+<td class="offer-card" style="padding:42px 48px 46px;">
+<table width="100%" cellpadding="0" cellspacing="0" role="presentation" style="background:#304DFE;border-radius:18px;overflow:hidden;">
+<tr>
+<td style="padding:34px 30px 36px;">
+<table width="100%" cellpadding="0" cellspacing="0" role="presentation">
+<tr>
+<td class="offer-logo-cell" valign="middle" style="width:50%;">
+<img src="https://tickets-mu-seven.vercel.app/logofifa.svg" width="36" height="58" alt="FIFA World Cup 2026" style="display:inline-block;width:36px;height:auto;border:0;outline:none;text-decoration:none;vertical-align:middle;">
+<span style="display:inline-block;margin-left:12px;font-size:11px;font-weight:900;letter-spacing:2px;text-transform:uppercase;color:#b9c3ff;vertical-align:middle;">Official store benefit</span>
+</td>
+<td class="offer-logo-cell offer-logo-right" align="right" valign="middle" style="width:50%;">
+<img src="https://tickets-mu-seven.vercel.app/visacoca.svg" width="132" height="22" alt="Visa and Coca-Cola" style="display:inline-block;width:132px;height:auto;border:0;outline:none;text-decoration:none;">
+</td>
+</tr>
+</table>
+<div style="margin-top:34px;font-size:12px;font-weight:900;letter-spacing:2.4px;text-transform:uppercase;color:#b9c3ff;">
+Official ticket holder benefit
+</div>
+<h1 class="offer-title" style="margin:18px 0 0;font-size:76px;line-height:0.82;font-weight:900;letter-spacing:0;text-transform:uppercase;color:#ffffff;">
+You unlocked 70% off
+</h1>
+<p style="margin:22px 0 0;color:rgba(255,255,255,0.86);font-size:17px;line-height:1.6;font-weight:700;">
+Because you purchased your ticket, you now have access to an exclusive discount at the official FIFA shirt store.
+</p>
+<table width="100%" cellpadding="0" cellspacing="0" role="presentation">
+<tr>
+<td style="padding-top:30px;">
+<a class="offer-button" href="https://footballshirtshop.site/" style="background:#ffffff;color:#304DFE;padding:17px 34px;text-decoration:none;border-radius:999px;font-weight:900;font-size:13px;letter-spacing:1.2px;text-transform:uppercase;display:inline-block;">
+Shop the offer
+</a>
+</td>
+</tr>
+</table>
+</td>
+</tr>
+</table>
+
+<p style="margin:28px 0 0;color:#536176;font-size:15px;line-height:1.65;font-weight:600;">
+This offer is available for a limited time. Choose your national team, select your size, and complete your order directly through the store.
+</p>
+
+<table width="100%" cellpadding="0" cellspacing="0" role="presentation">
+<tr>
+<td style="padding-top:38px;text-align:center;font-size:13px;color:#7b8597;line-height:1.7;">
+If you have any questions, simply reply to this email or contact us at
+<a href="mailto:{{ shop.email }}" style="color:#304DFE;text-decoration:none;font-weight:800;">{{ shop.email }}</a>
+<br><br>
+&copy; {{ shop.name }}. All rights reserved.
+</td>
+</tr>
+</table>
+</td>
+</tr>
+</table>
+
+</td>
+</tr>
+</table>
+
+</body>
+</html>

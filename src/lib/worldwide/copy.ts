@@ -87,6 +87,15 @@ export const enCopy = {
   "access.package": "Package",
   "access.status": "Status",
   "access.waiting": "Waiting for release",
+  "access.promoKicker": "Official store benefit",
+  "access.promoTitle": "Congratulations, you unlocked 70% off",
+  "access.promoText":
+    "Because you purchased your ticket, you now have access to an exclusive 70% discount at the official FIFA shirt store.",
+  "access.promoButton": "Shop the offer",
+  "access.promoClose": "Close promotion",
+  "access.promoModalTitle": "Your shirt offer is ready",
+  "access.promoModalText":
+    "Complete your matchday look with official national team shirts while your ticket release countdown continues.",
   "access.faqKicker": "FAQ",
   "access.faqTitle": "Before kickoff",
   "access.faq.q1": "When will my ticket be released?",
@@ -187,6 +196,15 @@ const ptBrCopy = {
   "access.package": "Pacote",
   "access.status": "Status",
   "access.waiting": "Aguardando liberação",
+  "access.promoKicker": "Benefício da loja oficial",
+  "access.promoTitle": "Parabéns, você liberou 70% OFF",
+  "access.promoText":
+    "Por ter comprado seu ingresso, você ganhou acesso a um desconto exclusivo de 70% na loja oficial de camisas da FIFA.",
+  "access.promoButton": "Ver oferta",
+  "access.promoClose": "Fechar promoção",
+  "access.promoModalTitle": "Sua oferta está liberada",
+  "access.promoModalText":
+    "Complete seu look de jogo com camisas oficiais das seleções enquanto acompanha a contagem para liberação do ingresso.",
   "access.faqKicker": "FAQ",
   "access.faqTitle": "Antes do jogo",
   "access.faq.q1": "Quando meu ingresso será liberado?",

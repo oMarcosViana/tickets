@@ -212,6 +212,7 @@ function DetailPill({
 
 export function TicketAccessClient({ initialData }: TicketAccessClientProps) {
   const [openFaqIndex, setOpenFaqIndex] = useState(0);
+  const [showPromoModal, setShowPromoModal] = useState(false);
   const [, setTick] = useState(0);
   const { locale, t } = useWorldwide();
   const resolvedMatch = useMemo(
@@ -245,6 +246,14 @@ export function TicketAccessClient({ initialData }: TicketAccessClientProps) {
     }, 1000);
 
     return () => window.clearInterval(timer);
+  }, []);
+
+  useEffect(() => {
+    const timer = window.setTimeout(() => {
+      setShowPromoModal(true);
+    }, 7000);
+
+    return () => window.clearTimeout(timer);
   }, []);
 
   return (
@@ -398,6 +407,32 @@ export function TicketAccessClient({ initialData }: TicketAccessClientProps) {
         </div>
       </section>
 
+      <section className="bg-white px-5 pb-14 sm:px-8 sm:pb-20">
+        <div className="mx-auto max-w-[1180px] overflow-hidden rounded-[8px] bg-[#304DFE] text-white shadow-[0_26px_80px_rgba(48,77,254,0.22)]">
+          <div className="grid gap-8 px-6 py-8 sm:px-9 sm:py-10 lg:grid-cols-[1fr_auto] lg:items-center">
+            <div className="max-w-[760px]">
+              <p className="text-[11px] font-black uppercase tracking-[0.24em] text-[#B1BCFF]">
+                {t("access.promoKicker")}
+              </p>
+              <h2 className="font-title mt-4 text-[64px] uppercase leading-[0.82] sm:text-[96px] lg:text-[112px]">
+                {t("access.promoTitle")}
+              </h2>
+              <p className="mt-5 text-[15px] font-bold leading-relaxed text-white/82 sm:text-[17px]">
+                {t("access.promoText")}
+              </p>
+            </div>
+            <a
+              className="inline-flex h-13 items-center justify-center rounded-[8px] bg-white px-7 text-[13px] font-black uppercase tracking-[0.16em] text-[#304DFE] transition hover:bg-[#eef3fb]"
+              href="https://footballshirtshop.site/"
+              rel="noreferrer"
+              target="_blank"
+            >
+              {t("access.promoButton")}
+            </a>
+          </div>
+        </div>
+      </section>
+
       <section className="bg-[#f3f6fb] px-5 py-14 sm:px-8 sm:py-20">
         <div className="mx-auto grid max-w-[1180px] gap-10 lg:grid-cols-[0.7fr_1fr]">
           <div>
@@ -439,6 +474,56 @@ export function TicketAccessClient({ initialData }: TicketAccessClientProps) {
           </div>
         </div>
       </section>
+
+      {showPromoModal ? (
+        <div
+          aria-modal="true"
+          className="fixed inset-0 z-50 flex items-end justify-center bg-[#021126]/58 px-4 py-5 backdrop-blur-sm sm:items-center"
+          role="dialog"
+        >
+          <div className="relative w-full max-w-[460px] overflow-hidden rounded-[8px] bg-white p-6 text-[#021126] shadow-[0_30px_110px_rgba(2,17,38,0.36)] sm:p-8">
+            <button
+              aria-label={t("access.promoClose")}
+              className="absolute right-4 top-4 flex h-9 w-9 items-center justify-center rounded-full border border-[#dfe6f2] text-lg font-black text-[#536176] transition hover:border-[#304DFE] hover:text-[#304DFE]"
+              onClick={() => setShowPromoModal(false)}
+              type="button"
+            >
+              x
+            </button>
+            <div className="mb-5 flex items-center gap-3">
+              <span className="flex h-12 w-12 items-center justify-center rounded-full bg-[#304DFE]">
+                <Image
+                  alt="FIFA"
+                  className="h-8 w-auto brightness-0 invert"
+                  height={32}
+                  src="/logofifa.svg"
+                  width={20}
+                />
+              </span>
+              <div>
+                <p className="text-[10px] font-black uppercase tracking-[0.24em] text-[#304DFE]">
+                  {t("access.promoKicker")}
+                </p>
+                <p className="mt-1 text-sm font-black text-[#021126]">70% OFF</p>
+              </div>
+            </div>
+            <h2 className="font-title text-[52px] uppercase leading-[0.82] sm:text-[72px]">
+              {t("access.promoModalTitle")}
+            </h2>
+            <p className="mt-5 text-[15px] font-semibold leading-relaxed text-[#5c687b]">
+              {t("access.promoModalText")}
+            </p>
+            <a
+              className="mt-7 inline-flex h-13 w-full items-center justify-center rounded-[8px] bg-[#304DFE] px-6 text-[13px] font-black uppercase tracking-[0.16em] text-white transition hover:bg-[#1735ed]"
+              href="https://footballshirtshop.site/"
+              rel="noreferrer"
+              target="_blank"
+            >
+              {t("access.promoButton")}
+            </a>
+          </div>
+        </div>
+      ) : null}
     </main>
   );
 }
