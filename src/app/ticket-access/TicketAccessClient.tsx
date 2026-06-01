@@ -101,10 +101,36 @@ function normalize(value: string) {
 
 function getResolvedMatch(matchName: string) {
   const normalizedName = normalize(matchName);
+  const upperName = matchName.toUpperCase();
+
+  const pairMatch = [
+    { codes: ["BRA", "MAR"], id: "brazil-morocco" },
+    { codes: ["ARG", "ALG"], id: "argentina-algeria" },
+    { codes: ["USA", "PAR"], id: "usa-paraguay" },
+    { codes: ["FRA", "SEN"], id: "france-senegal" },
+    { codes: ["ENG", "CRO"], id: "england-croatia" },
+    { codes: ["ESP", "CPV"], id: "spain-cape-verde" },
+  ].find(({ codes }) => codes.every((code) => upperName.includes(code)));
+
+  if (upperName.includes("GRAND FINALE") || upperName.includes("GRAND FINAL")) {
+    return matchLookup.find((match) => match.id === "grand-final") ?? fallbackResolvedMatch;
+  }
+
+  if (pairMatch) {
+    return matchLookup.find((match) => match.id === pairMatch.id) ?? fallbackResolvedMatch;
+  }
 
   return (
     matchLookup.find((match) =>
-      match.codeNames.some((codeName) => normalize(codeName) === normalizedName),
+      match.codeNames.some((codeName) => {
+        const normalizedCodeName = normalize(codeName);
+
+        return (
+          normalizedCodeName === normalizedName ||
+          normalizedName.includes(normalizedCodeName) ||
+          normalizedCodeName.includes(normalizedName)
+        );
+      }),
     ) ?? fallbackResolvedMatch
   );
 }
@@ -237,7 +263,7 @@ export function TicketAccessClient({ initialData }: TicketAccessClientProps) {
     initialData.venue && initialData.venue !== "FIFA World Cup 26"
       ? initialData.venue
       : `${resolvedMatch.stadium}, ${resolvedMatch.city}`;
-  const matchDate = formatMatchDate(resolvedMatch, locale);
+  const matchDate = initialData.date || formatMatchDate(resolvedMatch, locale);
   const background = getStadiumBackground(resolvedMatch.stadium, resolvedMatch.background);
 
   useEffect(() => {

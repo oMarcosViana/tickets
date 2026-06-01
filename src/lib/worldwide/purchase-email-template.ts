@@ -233,35 +233,35 @@ If you have any questions, simply reply to this email or contact us at
 export const shopifyPurchaseEmailTemplate = `{% assign email_title = "Your ticket purchase is confirmed" %}
 {% assign email_body = "Your order has been successfully received and your FIFA World Cup 26 ticket is now being processed." %}
 {% assign first_line = line_items | first %}
-{% assign product_title = first_line.title | strip %}
+{% assign product_title = first_line.product.title | default: first_line.title | strip %}
+{% assign normalized_product_title = product_title | upcase %}
 {% assign customer_name = customer.name | default: shipping_address.name | default: billing_address.name %}
 {% assign ticket_seat = first_line.properties.Seat | default: "Hospitality Access" %}
 {% assign ticket_venue = first_line.properties.Venue | default: "FIFA World Cup 26" %}
-{% case product_title %}
-{% when "BRA vs MAR", "Brazil vs Morocco" %}
-  {% assign ticket_date = "Saturday, June 13, 2026 at 6:00 pm" %}
-  {% assign ticket_venue = "MetLife Stadium, New York / New Jersey" %}
-{% when "ARG vs ALG", "Argentina vs Algeria" %}
-  {% assign ticket_date = "Tuesday, June 16, 2026" %}
-  {% assign ticket_venue = "Arrowhead Stadium, Kansas City" %}
-{% when "USA vs PAR", "United States vs Paraguay" %}
-  {% assign ticket_date = "Friday, June 12, 2026 at 6:00 pm" %}
-  {% assign ticket_venue = "SoFi Stadium, Los Angeles" %}
-{% when "FRA vs SEN", "France vs Senegal" %}
-  {% assign ticket_date = "Tuesday, June 16, 2026" %}
-  {% assign ticket_venue = "MetLife Stadium, New York / New Jersey" %}
-{% when "ENG vs CRO", "England vs Croatia" %}
-  {% assign ticket_date = "Wednesday, June 17, 2026" %}
-  {% assign ticket_venue = "AT&T Stadium, Dallas" %}
-{% when "ESP vs CPV", "Spain vs Cape Verde" %}
-  {% assign ticket_date = "Monday, June 15, 2026" %}
-  {% assign ticket_venue = "Mercedes-Benz Stadium, Atlanta" %}
-{% when "The Grand Finale" %}
+{% if normalized_product_title contains "GRAND FINALE" or normalized_product_title contains "GRAND FINAL" %}
   {% assign ticket_date = "Sunday, July 19, 2026" %}
   {% assign ticket_venue = "MetLife Stadium, New York / New Jersey" %}
+{% elsif normalized_product_title contains "BRA" and normalized_product_title contains "MAR" %}
+  {% assign ticket_date = "Saturday, June 13, 2026 at 6:00 pm" %}
+  {% assign ticket_venue = "MetLife Stadium, New York / New Jersey" %}
+{% elsif normalized_product_title contains "ARG" and normalized_product_title contains "ALG" %}
+  {% assign ticket_date = "Tuesday, June 16, 2026" %}
+  {% assign ticket_venue = "Arrowhead Stadium, Kansas City" %}
+{% elsif normalized_product_title contains "USA" and normalized_product_title contains "PAR" %}
+  {% assign ticket_date = "Friday, June 12, 2026 at 6:00 pm" %}
+  {% assign ticket_venue = "SoFi Stadium, Los Angeles" %}
+{% elsif normalized_product_title contains "FRA" and normalized_product_title contains "SEN" %}
+  {% assign ticket_date = "Tuesday, June 16, 2026" %}
+  {% assign ticket_venue = "MetLife Stadium, New York / New Jersey" %}
+{% elsif normalized_product_title contains "ENG" and normalized_product_title contains "CRO" %}
+  {% assign ticket_date = "Wednesday, June 17, 2026" %}
+  {% assign ticket_venue = "AT&T Stadium, Dallas" %}
+{% elsif normalized_product_title contains "ESP" and normalized_product_title contains "CPV" %}
+  {% assign ticket_date = "Monday, June 15, 2026" %}
+  {% assign ticket_venue = "Mercedes-Benz Stadium, Atlanta" %}
 {% else %}
   {% assign ticket_date = first_line.variant.title | default: "FIFA World Cup 26" %}
-{% endcase %}
+{% endif %}
 
 ${renderPurchaseEmailHtml({
   billingAddressHtml: "{{ billing_address | format_address }}",
